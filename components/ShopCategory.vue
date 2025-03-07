@@ -24,7 +24,6 @@
   const categories = ref([])
   
   const selectCategory = (category) => {
-    // Emit an event or use navigation to filter products
     console.log(`Selected category: ${category}`)
   }
   
