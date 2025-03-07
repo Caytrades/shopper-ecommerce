@@ -19,7 +19,7 @@
         <div class="flex flex-col md:flex-row">
           <!-- Left: Image display with thumbnails -->
           <div class="md:w-1/2 p-6 flex flex-col items-center justify-center bg-gray-50">
-            <!-- Main image with hover zoom effect -->
+            <!-- Main image -->
             <div class="relative w-full h-80 flex items-center justify-center overflow-hidden group">
               <img 
                 :src="currentImage" 
@@ -28,7 +28,7 @@
               />
             </div>
             
-            <!-- Thumbnail container with improved styling -->
+            <!-- Thumbnail container -->
             <div class="flex mt-6 space-x-3 justify-center">
               <div 
                 v-for="(img, index) in images" 
@@ -45,14 +45,14 @@
             </div>
           </div>
       
-          <!-- Right: Product details with improved spacing and typography -->
+          <!-- Right: Product details -->
           <div class="md:w-1/2 p-8">
-            <!-- Header section with title and price -->
+            <!-- Header section -->
             <div class="border-b border-gray-100 pb-4">
               <span class="text-sm font-medium text-blue-600 uppercase tracking-wider">{{ product.category }}</span>
               <h1 class="text-3xl font-bold text-gray-800 mt-1 mb-2">{{ product.title }}</h1>
               
-              <!-- Rating Section with improved stars -->
+              <!-- Rating Section -->
               <div class="flex items-center mb-4">
                 <div class="flex">
                   <template v-for="n in 5">
@@ -104,13 +104,13 @@
               </div>
             </div>
   
-            <!-- Description -->
+            <!-- Product Description -->
             <div class="mb-6">
               <h3 class="text-sm uppercase font-medium text-gray-500 mb-2">Description</h3>
               <p class="text-gray-700 leading-relaxed">{{ product.description }}</p>
             </div>
   
-            <!-- Add to Cart / Quantity Controls with improved styling -->
+            <!-- Add to Cart / Quantity Controls  -->
             <div class="mb-6">
               <h3 class="text-sm uppercase font-medium text-gray-500 mb-3">Quantity</h3>
               <div class="flex items-center">
@@ -157,7 +157,7 @@
               </button>
             </div>
       
-            <!-- Additional Info Section with improved icons and layout -->
+            <!-- Additional Info Section -->
             <div class="bg-gray-50 p-4 rounded-lg mb-6">
               <h3 class="text-sm uppercase font-medium text-gray-500 mb-3">Shipping & Returns</h3>
               <div class="grid grid-cols-1 gap-3">
@@ -182,7 +182,7 @@
               </div>
             </div>
       
-            <!-- Share Product Section with improved social buttons -->
+            <!-- Share Product Section -->
             <div>
               <h3 class="text-sm uppercase font-medium text-gray-500 mb-3">Share Product</h3>
               <div class="flex items-center space-x-4">
@@ -242,7 +242,7 @@
           </div>
         </div>
       
-        <!-- Related Products Component with improved styling -->
+        <!-- Related Products -->
         <div class="mt-16">
           <h2 class="text-2xl font-bold text-gray-800 mb-6">You May Also Like</h2>
           <RelatedProducts :category="product.category" :currentId="product.id" />
@@ -290,7 +290,6 @@
     
   const cartStore = useCartStore()
     
-  // Fetch product from Fake Store API
   const fetchProduct = async () => {
     try {
       product.value = await $fetch(`https://fakestoreapi.com/products/${productId}`)
@@ -306,11 +305,8 @@
     fetchProduct()
   })
     
-  // Use additional images if provided, otherwise only show one image as the thumbnail
   const images = computed(() => {
     if (product.value) {
-      // If product has an 'images' array with more than one element, use that.
-      // Otherwise, fallback to a single-element array.
       if (product.value.images && product.value.images.length > 1) {
         return product.value.images
       }
@@ -319,7 +315,6 @@
     return []
   })
       
-  // Cart quantity for this product
   const quantityInCart = computed(() => {
     const item = cartStore.items.find(item => item.id === product.value?.id)
     return item ? item.quantity : 0
@@ -358,7 +353,6 @@
     }
   }
       
-  // Rating stars logic
   const fullStars = computed(() => {
     if (product.value && product.value.rating && product.value.rating.rate) {
       return Math.floor(product.value.rating.rate)
@@ -373,7 +367,6 @@
     return false
   })
       
-  // Social Share Links
   const currentUrl = computed(() => (typeof window !== 'undefined' ? window.location.href : ''))
   const whatsappLink = computed(() => `https://api.whatsapp.com/send?text=Check out this product: ${currentUrl.value}`)
   const telegramLink = computed(() => `https://t.me/share/url?url=${currentUrl.value}&text=Check out this product!`)
