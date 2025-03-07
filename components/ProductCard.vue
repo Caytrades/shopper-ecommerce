@@ -15,7 +15,6 @@
           <span class="text-xl font-bold text-green-600">
             ${{ product.price.toFixed(2) }}
           </span>
-          <!-- You can also include the Add to Cart button here if needed -->
           <button 
             @click.stop="handleAddToCart"
             class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-700 transition-colors flex items-center"
@@ -43,7 +42,6 @@
 import { computed } from 'vue'
 import { useCartStore } from '~/stores/cart'
 
-// Destructure the required product prop
 const { product } = defineProps<{ product: any }>()
 const cartStore = useCartStore()
 
