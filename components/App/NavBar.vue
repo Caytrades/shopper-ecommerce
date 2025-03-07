@@ -18,7 +18,7 @@
           Home
         </NuxtLink>
         <NuxtLink 
-          to="/products" 
+          to="/all_products" 
           class="text-gray-700 hover:text-gray-900 transition-colors duration-300"
         >
           Products
