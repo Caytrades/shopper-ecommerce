@@ -37,12 +37,9 @@
   const fetchRelatedProducts = async () => {
     try {
       const products: Product[] = await $fetch('https://fakestoreapi.com/products')
-      // Filter products from the same category excluding the current product
       const filtered = products.filter(p => p.category === props.category && p.id !== props.currentId)
-      // Shuffle the array
       const shuffled = filtered.sort(() => Math.random() - 0.5)
-      // Select only three products
-      relatedProducts.value = shuffled.slice(0, 5)
+      relatedProducts.value = shuffled.slice(0, 3)
     } catch (error) {
       console.error('Error fetching related products:', error)
     }
@@ -52,7 +49,6 @@
     fetchRelatedProducts()
   })
   
-  // Re-fetch related products if category or currentId changes
   watch(
     () => [props.category, props.currentId],
     () => {
