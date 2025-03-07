@@ -81,12 +81,10 @@
   const currentIndex = ref(0);
   const autoplayTimer = ref(null);
   
-  // Navigate to next slide
   const nextSlide = () => {
     currentIndex.value = (currentIndex.value + 1) % props.images.length;
   };
   
-  // Navigate to previous slide
   const prevSlide = () => {
     currentIndex.value = 
       currentIndex.value === 0 
@@ -94,41 +92,34 @@
         : currentIndex.value - 1;
   };
   
-  // Set specific slide
   const setSlide = (index) => {
     currentIndex.value = index;
   };
   
-  // Start autoplay
   const startAutoplay = () => {
     autoplayTimer.value = setInterval(nextSlide, props.autoPlayInterval);
   };
   
-  // Pause autoplay
   const pauseAutoplay = () => {
     if (autoplayTimer.value) {
       clearInterval(autoplayTimer.value);
     }
   };
   
-  // Resume autoplay
   const resumeAutoplay = () => {
     startAutoplay();
   };
   
-  // Initialize autoplay on component mount
   onMounted(() => {
     startAutoplay();
   });
   
-  // Clear interval on component unmount
   onUnmounted(() => {
     pauseAutoplay();
   });
   </script>
   
   <style scoped>
-  /* Slide transition animations */
   .slide-enter-active,
   .slide-leave-active {
     transition: all 0.5s ease;
