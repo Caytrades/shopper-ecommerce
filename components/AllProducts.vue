@@ -27,7 +27,6 @@ interface Product {
   }
 }
 
-// Let's annotate the products ref with the Product type
 const products = ref<Product[]>([])
 
 onMounted(async () => {
