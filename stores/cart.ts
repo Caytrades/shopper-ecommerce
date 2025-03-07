@@ -1,9 +1,7 @@
-// ~/stores/cart.ts
 import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    // Each item stores the product id, title, price, and quantity
     items: [] as Array<{ id: number; title: string; price: number; quantity: number }>
   }),
   actions: {

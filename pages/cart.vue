@@ -23,7 +23,7 @@
               class="border-b hover:bg-gray-50"
             >
               <td class="py-3 px-4 flex items-center">
-                <!-- Optionally add an image if available -->
+                <!-- Will come back here to figure out how to add an image -->
                 <div class="ml-2 font-medium">{{ item.title }}</div>
               </td>
               <td class="py-3 px-4">
@@ -87,20 +87,16 @@ const totalPrice = computed(() =>
   cartStore.items.reduce((acc, item) => acc + item.price * item.quantity, 0)
 )
 
-// Remove an item from the cart
 const removeItem = (id: number) => {
   cartStore.removeFromCart(id)
 }
 
-// Increase quantity using the same addToCart action
 const increaseQuantity = (item: { id: number; title: string; price: number; quantity: number }) => {
   cartStore.addToCart({ id: item.id, title: item.title, price: item.price })
 }
 
-// Decrease quantity or remove the item if quantity reaches 1
 const decreaseQuantity = (item: { id: number; title: string; price: number; quantity: number }) => {
   if (item.quantity > 1) {
-    // Directly update the quantity in the store
     const existingItem = cartStore.items.find(i => i.id === item.id)
     if (existingItem) {
       existingItem.quantity--
@@ -112,9 +108,8 @@ const decreaseQuantity = (item: { id: number; title: string; price: number; quan
 
 const checkout = async () => {
   try {
-    // Prepare payload per Fake Store API requirements
     const payload = {
-      userId: 1, // Replace with actual user id if available
+      userId: 1, // Will come back here when I setup the login
       date: new Date().toISOString(),
       products: cartStore.items.map(item => ({
         productId: item.id,
@@ -126,7 +121,6 @@ const checkout = async () => {
       body: JSON.stringify(payload)
     })
     console.log('Checkout response:', response)
-    // Clear cart after checkout
     cartStore.clearCart()
   } catch (error) {
     console.error('Checkout error:', error)
